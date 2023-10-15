@@ -16,30 +16,31 @@ const BlogPage = () => {
 
     const blogId = location.pathname.split("/").at(-1);
 
-    async function fetchRelatedBlogs() {
-        setLoading(true);
-        let url = `${newBaseUrl}get-blog?blogId=${blogId}`;
-        console.log(url);
-        try{
-            const res = await fetch(url);
-            const data = await res.json();
-
-            setBlog(data.blog);
-            setRelatedBlogs(data.relatedBlogs)
-        }
-        catch(error){
-            console.log("Error in blog ID call");
-            setBlog(null);
-            setRelatedBlogs([]);
-        }
-        setLoading(false);
-    }
-
-    useEffect( () => {
-        if(blogId){
+    useEffect(() => {
+        const fetchRelatedBlogs = async () => {
+            setLoading(true);
+            let url = `${newBaseUrl}get-blog?blogId=${blogId}`;
+            console.log(url);
+            try {
+                const res = await fetch(url);
+                const data = await res.json();
+    
+                setBlog(data.blog);
+                setRelatedBlogs(data.relatedBlogs);
+            } catch (error) {
+                console.error("Error in blog ID call:", error);
+                setBlog(null);
+                setRelatedBlogs([]);
+            } finally {
+                setLoading(false);
+            }
+        };
+    
+        if (blogId) {
             fetchRelatedBlogs();
         }
-    }, [location.pathname])
+    }, [blogId, newBaseUrl,setLoading]);
+    
 
   return (
     <div className='mt-5'>
