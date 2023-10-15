@@ -1,5 +1,5 @@
 import "./App.css";
-import { createContext, useContext, useEffect, useState } from "react";
+import {  useContext, useEffect} from "react";
 import { AppContext } from "./context/AppContext";
 
 import { useLocation, useSearchParams } from "react-router-dom";
@@ -16,10 +16,10 @@ import { Route,Routes } from "react-router-dom";
 export default function App() {
   const { fetchBlogPosts } = useContext(AppContext);
 
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const location = useLocation();
 
-  const{darkMode,setDarkMode} = useContext(AppContext)
+  
   
 
   useEffect(() => {
@@ -45,7 +45,7 @@ export default function App() {
 
   return (
     
-    <Routes className={`h-full w-full relative ${darkMode ? 'bg-black text-white':'bg-white text-black'}`}>
+    <Routes>
      <Route path="/" element = {<Home/>}/>
      <Route path="/blog/:blogId" element = {<BlogPage/>}/>
      <Route path="/tags/:tag" element = {<TagPage/>}/>
