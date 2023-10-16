@@ -17,28 +17,28 @@ const BlogPage = () => {
     const blogId = location.pathname.split("/").at(-1);
 
     useEffect(() => {
-        const fetchRelatedBlogs = async () => {
-            setLoading(true);
-            let url = `${newBaseUrl}get-blog?blogId=${blogId}`;
-            console.log(url);
-            try {
-                const res = await fetch(url);
-                const data = await res.json();
+      const fetchRelatedBlogs = async () => {
+        setLoading(true);
+        let url = `${newBaseUrl}get-blog?blogId=${blogId}`;
+        console.log(url);
+        try {
+        const res = await fetch(url);
+        const data = await res.json();
     
-                setBlog(data.blog);
-                setRelatedBlogs(data.relatedBlogs);
-            } catch (error) {
-                console.error("Error in blog ID call:", error);
-                setBlog(null);
-                setRelatedBlogs([]);
-            } finally {
-                setLoading(false);
-            }
-        };
-    
-        if (blogId) {
-            fetchRelatedBlogs();
+        setBlog(data.blog);
+        setRelatedBlogs(data.relatedBlogs);
+        }catch (error) {
+        console.error("Error in blog ID call:", error);
+        setBlog(null);
+        setRelatedBlogs([]);
+        } finally {
+          setLoading(false);
         }
+      };
+    
+      if (blogId) {
+        fetchRelatedBlogs();
+      }
     }, [blogId, newBaseUrl,setLoading]);
     
 

@@ -16,7 +16,7 @@ import { Route,Routes } from "react-router-dom";
 export default function App() {
   const { fetchBlogPosts } = useContext(AppContext);
 
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const location = useLocation();
 
   
